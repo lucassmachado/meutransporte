@@ -49,7 +49,7 @@ public class PontoTaxi {
 
 	@JsonIgnore
 	public String getLinhaArquivo() {
-		return String.format("%s#%s#%s#%s", nomePonto, latitude, longitude, dataHoraCadastro);
+		return String.format("%s%s#%s#%s#%s", System.lineSeparator(), nomePonto, latitude, longitude, dataHoraCadastro);
 	}
 
 }

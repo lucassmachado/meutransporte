@@ -8,14 +8,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class Configuracao {
+public class ConfiguracaoComum {
 
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder
-				.setConnectTimeout(Duration.ofMillis(3000))
-				.setReadTimeout(Duration.ofMillis(3000))
-				.build();
+			.setConnectTimeout(Duration.ofMillis(3000))
+			.setReadTimeout(Duration.ofMillis(3000))
+			.build();
 	}
 
 }
