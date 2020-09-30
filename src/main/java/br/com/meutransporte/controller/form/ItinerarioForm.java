@@ -1,40 +1,26 @@
-package br.com.meutransporte.integracao.dto;
+package br.com.meutransporte.controller.form;
 
 import java.math.BigDecimal;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import br.com.meutransporte.model.Itinerario;
 
-public class ItinerarioDto {
+public class ItinerarioForm {
 
-	@JsonProperty("_id")
-	private Integer id;
-
-	@JsonProperty("data_extracao")
 	private String dataExtracao;
 
 	private String linha;
 
 	private String sentido;
 
-	@JsonProperty("numero_sequencia")
 	private Integer numero;
 
 	private String tipo;
 
 	private String nome;
 
-	@JsonProperty("endereco_logradouro")
 	private String logradouro;
 
 	private BigDecimal rank;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getDataExtracao() {
 		return dataExtracao;
@@ -98,6 +84,19 @@ public class ItinerarioDto {
 
 	public void setRank(BigDecimal rank) {
 		this.rank = rank;
+	}
+
+	public Itinerario criarItinerario() {
+		Itinerario itinerario = new Itinerario();
+		itinerario.setDataExtracao(dataExtracao);
+		itinerario.setLinha(linha);
+		itinerario.setSentido(sentido);
+		itinerario.setNumero(numero);
+		itinerario.setTipo(tipo);
+		itinerario.setNome(nome);
+		itinerario.setLogradouro(logradouro);
+		itinerario.setRank(rank);
+		return itinerario;
 	}
 
 }

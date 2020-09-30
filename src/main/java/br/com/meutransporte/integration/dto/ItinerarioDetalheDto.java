@@ -1,4 +1,4 @@
-package br.com.meutransporte.integracao.dto;
+package br.com.meutransporte.integration.dto;
 
 import java.util.List;
 
