@@ -41,7 +41,7 @@ public class PontosTaxiService {
 			}
 		} catch (FileNotFoundException e) {
 			// TODO: colocar log
-			System.out.println(e);
+			System.out.println("Arquivo não encontrado");
 		}
 	}
 
@@ -59,9 +59,10 @@ public class PontosTaxiService {
 		return pontosTaxi;
 	}
 
-	public void cadastrar(PontoTaxi pontoTaxi) {
+	public PontoTaxi cadastrar(PontoTaxi pontoTaxi) {
 		atualizarLista(pontoTaxi);
 		atualizarArquivo(pontoTaxi);
+		return pontoTaxi;
 	}
 
 	private void atualizarLista(PontoTaxi pontoTaxi) {
@@ -77,7 +78,7 @@ public class PontosTaxiService {
 			Files.write(ResourceUtils.getFile(arquivoPontosTaxi).toPath(), novaLinha, StandardOpenOption.APPEND);
 		} catch (IOException e) {
 			// TODO: lançar exceção
-			System.out.println(e);
+			System.out.println("Não foi possível atualizar o arquivo");
 		}
 	}
 

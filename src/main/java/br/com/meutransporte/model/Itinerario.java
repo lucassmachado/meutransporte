@@ -101,6 +101,13 @@ public class Itinerario {
 		this.rank = rank;
 	}
 
+	public boolean isDiferencaInformacao(Itinerario itinerario) {
+		return !dataExtracao.equals(itinerario.dataExtracao) || linha.equalsIgnoreCase(itinerario.linha)
+				|| sentido.equalsIgnoreCase(itinerario.sentido) || numero.compareTo(itinerario.numero) != 0
+				|| tipo.equalsIgnoreCase(itinerario.tipo) || nome.equalsIgnoreCase(itinerario.nome)
+				|| logradouro.equalsIgnoreCase(itinerario.logradouro) || rank.compareTo(itinerario.rank) != 0;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

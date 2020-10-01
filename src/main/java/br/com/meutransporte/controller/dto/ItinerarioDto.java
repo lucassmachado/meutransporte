@@ -1,4 +1,4 @@
-package br.com.meutransporte.integration.dto;
+package br.com.meutransporte.controller.dto;
 
 import java.math.BigDecimal;
 
@@ -113,6 +113,10 @@ public class ItinerarioDto {
 
 	public void setRank(BigDecimal rank) {
 		this.rank = rank;
+	}
+
+	public boolean isDiferencaInformacao(ItinerarioDto itinerario) {
+		return false;
 	}
 
 }

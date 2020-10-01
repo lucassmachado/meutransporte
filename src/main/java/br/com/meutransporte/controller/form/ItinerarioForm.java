@@ -2,24 +2,35 @@ package br.com.meutransporte.controller.form;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import br.com.meutransporte.model.Itinerario;
 
 public class ItinerarioForm {
 
+	@NotNull @NotEmpty
 	private String dataExtracao;
 
+	@NotNull @NotEmpty
 	private String linha;
 
+	@NotNull @NotEmpty
 	private String sentido;
 
+	@NotNull
 	private Integer numero;
 
+	@NotNull @NotEmpty
 	private String tipo;
 
+	@NotNull @NotEmpty
 	private String nome;
 
+	@NotNull @NotEmpty
 	private String logradouro;
 
+	@NotNull 
 	private BigDecimal rank;
 
 	public String getDataExtracao() {

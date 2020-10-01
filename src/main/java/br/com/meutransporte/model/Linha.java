@@ -4,16 +4,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Linha {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
 	private String codigo;
 
+	@NotNull
+	@NotEmpty
 	private String nome;
+
+	public boolean isDiferencaInformacao(Linha linha) {
+		return !codigo.equalsIgnoreCase(linha.codigo) || !nome.equalsIgnoreCase(linha.nome);
+	}
 
 	public Long getId() {
 		return id;

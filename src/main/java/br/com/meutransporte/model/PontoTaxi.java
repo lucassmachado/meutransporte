@@ -3,16 +3,23 @@ package br.com.meutransporte.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class PontoTaxi {
 
+	@NotNull @NotEmpty
 	private String nomePonto;
 
+	@NotNull
 	private BigDecimal latitude;
 
+	@NotNull
 	private BigDecimal longitude;
 
+	@NotNull
 	private LocalDateTime dataHoraCadastro;
 
 	public String getNomePonto() {

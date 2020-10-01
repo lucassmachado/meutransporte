@@ -8,4 +8,6 @@ public interface LinhaRepository extends JpaRepository<Linha, Long> {
 
 	Linha findByNome(String nome);
 
+	Linha findByCodigoAndNome(String codigo, String nome);
+
 }

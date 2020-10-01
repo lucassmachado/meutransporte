@@ -17,32 +17,32 @@ public class DataPoaUrlBuilder {
 	private String resourceId;
 
 	public DataPoaUrlBuilder cria() {
-		this.action = env.getProperty("datapoa.action.create");
+		this.action = "datapoa.action.create";
 		return this;
 	}
 
 	public DataPoaUrlBuilder atualizaOuInsere() {
-		this.action = env.getProperty("datapoa.action.upsert");
+		this.action = "datapoa.action.upsert";
 		return this;
 	}
 
 	public DataPoaUrlBuilder busca() {
-		this.action = env.getProperty("datapoa.action.search");
+		this.action = "datapoa.action.search";
 		return this;
 	}
-	
+
 	public DataPoaUrlBuilder itinerarios() {
-		this.action = env.getProperty("datapoa.resource.id.itinerarios");
+		this.resourceId = "datapoa.resource.id.itinerarios";
 		return this;
 	}
-	
+
 	public DataPoaUrlBuilder linhas() {
-		this.action = env.getProperty("datapoa.resource.id.linhas");
+		this.resourceId = "datapoa.resource.id.linhas";
 		return this;
 	}
 
 	public String contruir() {
-		return String.format("%s%s%s", url, action, resourceId);
+		return String.format("%s%s%s", url, env.getProperty(action), env.getProperty(resourceId));
 	}
 
 }
