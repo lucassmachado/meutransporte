@@ -1,7 +1,5 @@
 package br.com.meutransporte.model;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +10,6 @@ public class Itinerario {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	private String dataExtracao;
 
 	private String linha;
 
@@ -27,22 +23,12 @@ public class Itinerario {
 
 	private String logradouro;
 
-	private BigDecimal rank;
-
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getDataExtracao() {
-		return dataExtracao;
-	}
-
-	public void setDataExtracao(String dataExtracao) {
-		this.dataExtracao = dataExtracao;
 	}
 
 	public String getLinha() {
@@ -93,19 +79,10 @@ public class Itinerario {
 		this.logradouro = logradouro;
 	}
 
-	public BigDecimal getRank() {
-		return rank;
-	}
-
-	public void setRank(BigDecimal rank) {
-		this.rank = rank;
-	}
-
 	public boolean isDiferencaInformacao(Itinerario itinerario) {
-		return !dataExtracao.equals(itinerario.dataExtracao) || linha.equalsIgnoreCase(itinerario.linha)
-				|| sentido.equalsIgnoreCase(itinerario.sentido) || numero.compareTo(itinerario.numero) != 0
-				|| tipo.equalsIgnoreCase(itinerario.tipo) || nome.equalsIgnoreCase(itinerario.nome)
-				|| logradouro.equalsIgnoreCase(itinerario.logradouro) || rank.compareTo(itinerario.rank) != 0;
+		return linha.equalsIgnoreCase(itinerario.linha) || sentido.equalsIgnoreCase(itinerario.sentido)
+				|| numero.compareTo(itinerario.numero) != 0 || tipo.equalsIgnoreCase(itinerario.tipo)
+				|| nome.equalsIgnoreCase(itinerario.nome) || logradouro.equalsIgnoreCase(itinerario.logradouro);
 	}
 
 	@Override

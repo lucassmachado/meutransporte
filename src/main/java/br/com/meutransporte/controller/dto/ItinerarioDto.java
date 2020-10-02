@@ -1,46 +1,52 @@
 package br.com.meutransporte.controller.dto;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.meutransporte.model.Itinerario;
+import io.swagger.annotations.ApiModelProperty;
 
 public class ItinerarioDto {
 
 	@JsonProperty("_id")
+	@ApiModelProperty(value = "ID do itinerário", required = true)
 	private Long id;
 
 	@JsonProperty("data_extracao")
-	private String dataExtracao;
+	@ApiModelProperty(value = "Data e hora de realização da extração de dados do sistema", required = true)
+	private LocalDateTime dataExtracao;
 
+	@ApiModelProperty(value = "Código da linha", required = true)
 	private String linha;
 
+	@ApiModelProperty(value = "Sentido da linha (centro/bairro, etc)", required = true)
 	private String sentido;
 
 	@JsonProperty("numero_sequencia")
+	@ApiModelProperty(value = "Ordenação dos logradouros dentro do Itinerário", required = true)
 	private Integer numero;
 
+	@ApiModelProperty(value = "Tipificação do item do itinerário (Logradouro, Terminal ou Ponto de Referência)", required = true)
 	private String tipo;
 
+	@ApiModelProperty(value = "Nome do itinerário", required = true)
 	private String nome;
 
 	@JsonProperty("endereco_logradouro")
+	@ApiModelProperty(value = "Endereço", required = true)
 	private String logradouro;
-
-	private BigDecimal rank;
 
 	public ItinerarioDto(Itinerario itinerario) {
 		super();
 		this.id = itinerario.getId();
-		this.dataExtracao = itinerario.getDataExtracao();
+		this.dataExtracao = LocalDateTime.now();
 		this.linha = itinerario.getLinha();
 		this.sentido = itinerario.getSentido();
 		this.numero = itinerario.getNumero();
 		this.tipo = itinerario.getTipo();
 		this.nome = itinerario.getNome();
 		this.logradouro = itinerario.getLogradouro();
-		this.rank = itinerario.getRank();
 	}
 
 	public Long getId() {
@@ -51,11 +57,11 @@ public class ItinerarioDto {
 		this.id = id;
 	}
 
-	public String getDataExtracao() {
+	public LocalDateTime getDataExtracao() {
 		return dataExtracao;
 	}
 
-	public void setDataExtracao(String dataExtracao) {
+	public void setDataExtracao(LocalDateTime dataExtracao) {
 		this.dataExtracao = dataExtracao;
 	}
 
@@ -105,18 +111,6 @@ public class ItinerarioDto {
 
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
-	}
-
-	public BigDecimal getRank() {
-		return rank;
-	}
-
-	public void setRank(BigDecimal rank) {
-		this.rank = rank;
-	}
-
-	public boolean isDiferencaInformacao(ItinerarioDto itinerario) {
-		return false;
 	}
 
 }

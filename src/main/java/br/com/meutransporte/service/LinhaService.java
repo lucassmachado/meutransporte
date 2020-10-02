@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.meutransporte.controller.form.LinhaForm;
 import br.com.meutransporte.model.Linha;
 import br.com.meutransporte.repository.LinhaRepository;
 
@@ -22,12 +23,13 @@ public class LinhaService {
 		return linhaRepository.findByNome(nome);
 	}
 
-	public Linha cadastrar(Linha linha) {
+	public Linha cadastrar(LinhaForm linha) {
 		Linha resultado = linhaRepository.findByCodigoAndNome(linha.getCodigo(), linha.getNome());
-		if (resultado == null || linha.isDiferencaInformacao(resultado)) {
-			return linhaRepository.save(linha);
+		Linha linhaNova = linha.criarLinha();
+		if (resultado == null || resultado.isDiferencaInformacao(linhaNova)) {
+			return linhaRepository.save(linhaNova);
 		}
-		return linha;
+		return linhaNova;
 	}
 
 }

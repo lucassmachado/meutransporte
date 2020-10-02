@@ -1,45 +1,41 @@
 package br.com.meutransporte.controller.form;
 
-import java.math.BigDecimal;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import br.com.meutransporte.model.Itinerario;
+import io.swagger.annotations.ApiModelProperty;
 
 public class ItinerarioForm {
 
-	@NotNull @NotEmpty
-	private String dataExtracao;
-
-	@NotNull @NotEmpty
+	@NotNull
+	@NotEmpty
+	@ApiModelProperty(value = "Código da linha", required = true)
 	private String linha;
 
-	@NotNull @NotEmpty
+	@NotNull
+	@NotEmpty
+	@ApiModelProperty(value = "Sentido da linha (centro/bairro, etc)", required = true)
 	private String sentido;
 
 	@NotNull
+	@ApiModelProperty(value = "Ordenação dos logradouros dentro do Itinerário", required = true)
 	private Integer numero;
 
-	@NotNull @NotEmpty
+	@NotNull
+	@NotEmpty
+	@ApiModelProperty(value = "Tipificação do item do itinerário (Logradouro, Terminal ou Ponto de Referência)", required = true)
 	private String tipo;
 
-	@NotNull @NotEmpty
+	@NotNull
+	@NotEmpty
+	@ApiModelProperty(value = "Nome do itinerário", required = true)
 	private String nome;
 
-	@NotNull @NotEmpty
+	@NotNull
+	@NotEmpty
+	@ApiModelProperty(value = "Endereço", required = true)
 	private String logradouro;
-
-	@NotNull 
-	private BigDecimal rank;
-
-	public String getDataExtracao() {
-		return dataExtracao;
-	}
-
-	public void setDataExtracao(String dataExtracao) {
-		this.dataExtracao = dataExtracao;
-	}
 
 	public String getLinha() {
 		return linha;
@@ -89,24 +85,14 @@ public class ItinerarioForm {
 		this.logradouro = logradouro;
 	}
 
-	public BigDecimal getRank() {
-		return rank;
-	}
-
-	public void setRank(BigDecimal rank) {
-		this.rank = rank;
-	}
-
 	public Itinerario criarItinerario() {
 		Itinerario itinerario = new Itinerario();
-		itinerario.setDataExtracao(dataExtracao);
 		itinerario.setLinha(linha);
 		itinerario.setSentido(sentido);
 		itinerario.setNumero(numero);
 		itinerario.setTipo(tipo);
 		itinerario.setNome(nome);
 		itinerario.setLogradouro(logradouro);
-		itinerario.setRank(rank);
 		return itinerario;
 	}
 

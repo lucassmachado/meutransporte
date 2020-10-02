@@ -1,0 +1,38 @@
+version: '3'
+services:
+   backend:
+      build:
+         dockerfile: ./docker/aplicacao.dockerfile
+         context: .
+      image: meutransporte/backend
+      container_name: meutransporte-back
+      ports:
+         - "8080:8080"
+      environment:
+        DB_URL: 'jdbc:mysql://database:3306/meutransporte'
+        DB_USERNAME: 'root'
+        DB_PASSWORD: 'root'
+      networks:
+         - production-network
+      depends_on:
+         - "database"
+
+   database:
+      build:
+            dockerfile: ./docker/banco.dockerfile
+            context: .
+      image: meutransporte/database
+      command: --default-authentication-plugin=mysql_native_password
+      container_name: meutransporte-db
+      ports:
+         - "3306:3306"
+      networks:
+         - production-network
+      environment:
+         MYSQL_ROOT_PASSWORD: root
+         MYSQL_DATABASE: meutransporte
+         MYSQL_PASSWORD: root
+
+networks:
+   production-network:
+      driver: bridge

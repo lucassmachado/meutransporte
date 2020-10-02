@@ -1,6 +1,5 @@
 package br.com.meutransporte.service;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -15,8 +14,8 @@ import java.util.Scanner;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 import br.com.meutransporte.model.PontoTaxi;
 
@@ -28,18 +27,18 @@ public class PontosTaxiService {
 	private static final String DELIMITADOR_ARQUIVO = "#|\r\n";
 
 	@Value(CAMINHO_ARQUIVO)
-	private String arquivoPontosTaxi;
+	private Resource arquivoPontosTaxi;
 
 	private List<PontoTaxi> pontosTaxi;
 
 	@PostConstruct
 	public void lerArquivoPontosTaxi() {
 		pontosTaxi = new ArrayList<>();
-		try (Scanner leitor = new Scanner(ResourceUtils.getFile(arquivoPontosTaxi)).useDelimiter(DELIMITADOR_ARQUIVO)) {
+		try (Scanner leitor = new Scanner(arquivoPontosTaxi.getInputStream()).useDelimiter(DELIMITADOR_ARQUIVO)) {
 			while (leitor.hasNext()) {
 				pontosTaxi.add(criarPontoTaxi(leitor));
 			}
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			// TODO: colocar log
 			System.out.println("Arquivo não encontrado");
 		}
@@ -60,9 +59,12 @@ public class PontosTaxiService {
 	}
 
 	public PontoTaxi cadastrar(PontoTaxi pontoTaxi) {
-		atualizarLista(pontoTaxi);
-		atualizarArquivo(pontoTaxi);
-		return pontoTaxi;
+		PontoTaxi ponto = pontoTaxi;
+		ponto.setDataHoraCadastro(LocalDateTime.now());
+
+		atualizarLista(ponto);
+		atualizarArquivo(ponto);
+		return ponto;
 	}
 
 	private void atualizarLista(PontoTaxi pontoTaxi) {
@@ -73,9 +75,9 @@ public class PontosTaxiService {
 	}
 
 	private void atualizarArquivo(PontoTaxi pontoTaxi) {
-		try  {
+		try {
 			List<String> novaLinha = Arrays.asList(pontoTaxi.getLinhaArquivo());
-			Files.write(ResourceUtils.getFile(arquivoPontosTaxi).toPath(), novaLinha, StandardOpenOption.APPEND);
+			Files.write(arquivoPontosTaxi.getFile().toPath(), novaLinha, StandardOpenOption.APPEND);
 		} catch (IOException e) {
 			// TODO: lançar exceção
 			System.out.println("Não foi possível atualizar o arquivo");
