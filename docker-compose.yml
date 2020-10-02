@@ -22,7 +22,6 @@ services:
             dockerfile: ./docker/banco.dockerfile
             context: .
       image: meutransporte/database
-      command: --default-authentication-plugin=mysql_native_password
       container_name: meutransporte-db
       ports:
          - "3306:3306"
@@ -32,6 +31,8 @@ services:
          MYSQL_ROOT_PASSWORD: root
          MYSQL_DATABASE: meutransporte
          MYSQL_PASSWORD: root
+         MYSQL_USER: root
+         MYSQL_ROOT_HOST: 'localhost'
 
 networks:
    production-network:
