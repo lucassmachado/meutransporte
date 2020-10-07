@@ -5,8 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import br.com.meutransporte.service.components.Localizacao;
+
 @Entity
-public class Linha {
+public class Linha implements Localizacao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +44,16 @@ public class Linha {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	@Override
+	public double getLatitude() {
+		return 0;
+	}
+
+	@Override
+	public double getLongitude() {
+		return 0;
 	}
 
 	@Override

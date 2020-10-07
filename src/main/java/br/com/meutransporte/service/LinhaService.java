@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import br.com.meutransporte.controller.form.LinhaForm;
 import br.com.meutransporte.model.Linha;
 import br.com.meutransporte.repository.LinhaRepository;
+import br.com.meutransporte.service.components.FiltradorLocalizacao;
+import br.com.meutransporte.service.components.FiltroLocalizacao;
 
 @Service
 public class LinhaService {
@@ -15,6 +17,9 @@ public class LinhaService {
 	@Autowired
 	private LinhaRepository linhaRepository;
 
+	@Autowired 
+	private FiltradorLocalizacao filtrador;
+	
 	public List<Linha> listar() {
 		return linhaRepository.findAll();
 	}
@@ -30,6 +35,10 @@ public class LinhaService {
 			return linhaRepository.save(linhaNova);
 		}
 		return linhaNova;
+	}
+
+	public List<Linha> listarLinhasDentroRaioKm(FiltroLocalizacao filtro) {
+		return filtrador.filtrar(listar(), filtro);
 	}
 
 }
